@@ -47,9 +47,9 @@ public class Text{
 	int j=1;
 	for(i=1;i<10;i++){
 		for(j=1;j<i;j++){
-			System.out.println(""+i+"x"+j+"="+i*j+"\t");
+			System.out.printf("%dx%d=%d\t",j,i,i*j);
 		}
-		System.out.println("\n");
+		System.out.printf("\n");
 	}
 	}
 }

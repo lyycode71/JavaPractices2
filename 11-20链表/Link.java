@@ -117,6 +117,94 @@ public class Link {
         }
         return low;
     }
+    public static Node reverseL(Node head){
+        Node p1=middle(head);
+        Node p2=null;
+        while(p1!=null){
+            Node p3=p1.next;
+            p1.next=p2;
+            p2=p1;
+            p1=p3;
+
+        }
+        return p2;
+    }
+    public static boolean chk(Node head){
+        Node k=reverseL(head);
+        Node a=head;
+        while(a!=null&&k!=null){
+            if(a.val!=k.val) {
+                return false;
+            }
+                a = a.next;
+                k = k.next;
+
+        }
+        return true;
+    }
+    public static Node part(Node head,int x){
+        Node cur=head;
+        Node sHead=null;
+        Node sLast=null;
+        Node bHead=null;
+        Node bLast=null;
+        while(cur!=null){
+            if(cur.val<=x){
+                if(sHead==null){
+                    sHead=cur;
+                }else{
+                    sLast.next=cur;
+                }
+                sLast=cur;
+            }
+            if(cur.val>x){
+                if(bHead==null){
+                    bHead=cur;
+                }else{
+                    bLast.next=cur;
+                }
+                bLast=cur;
+            }
+
+            cur=cur.next;
+        }
+        if(sHead==null){
+            return bHead;
+        }
+        if(bHead==null){
+            return sHead;
+        }
+        sLast.next=bHead;
+        bLast.next=null;
+        return sHead;
+    }
+    public static Node deleteDuplication(Node head){
+        if(head==null){
+            return head;
+        }
+        Node pre=new Node(0);
+        Node fake=pre;
+        pre.next=head;
+        Node cur=head;
+        Node next=head.next;
+        while(next!=null){
+            if(cur.val!=next.val){
+                pre=pre.next;
+                cur=cur.next;
+                next=next.next;
+            }else{
+                while(next!=null&&cur.val==next.val){
+                  next=next.next;
+                }
+                pre.next=next;
+                cur=next;
+                if(next!=null){
+                    next=next.next;
+                }
+            }
+        }
+        return fake.next;
+    }
     public static void main(String[] args){
      Node head=build();
      Node nHead=reverseList(head);
